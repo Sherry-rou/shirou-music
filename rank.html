@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐排行榜 - QQ音乐</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="rank-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-music"></i>
+                <span>QQ音乐</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+                <a href="rank.html" class="nav-link active">
+                    <i class="fas fa-trophy"></i> 排行榜
+                </a>
+                <a href="search.html" class="nav-link">
+                    <i class="fas fa-search"></i> 搜索
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user"></i> 个人中心
+                </a>
+            </div>
+            <div class="nav-user">
+                <img src="image/音乐爱好者头像.png" alt="用户头像" class="user-avatar" id="userAvatar">
+                <span class="user-name" id="userName">音乐爱好者</span>
+                <div class="user-menu">
+                    <a href="login.html" class="menu-item">
+                        <i class="fas fa-sign-out-alt"></i> 退出登录
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 直接设置头像路径，确保不受缓存影响 -->
+    <script>
+        // 立即执行函数，确保在页面加载时设置正确的头像路径
+        (function() {
+            const userAvatar = document.getElementById('userAvatar');
+            if (userAvatar) userAvatar.src = 'image/音乐爱好者头像.png';
+            // 清除localStorage中的头像数据
+            if (localStorage.getItem('currentUser')) {
+                const userData = JSON.parse(localStorage.getItem('currentUser'));
+                delete userData.avatar;
+                localStorage.setItem('currentUser', JSON.stringify(userData));
+            }
+        })();
+    </script>
+
+    <!-- 主要内容区域 -->
+    <main class="main-content">
+        <div class="rank-container">
+            <!-- 页面标题 -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-trophy"></i>
+                    音乐排行榜
+                </h1>
+                <p class="page-subtitle">发现最热门的音乐，追踪音乐流行趋势</p>
+            </div>
+
+            <!-- 榜单分类导航 -->
+            <div class="rank-categories">
+                <button class="category-btn active" data-category="hot">
+                    <i class="fas fa-fire"></i>
+                    热门榜
+                </button>
+            </div>
+
+            <!-- 热门榜 -->
+            <div class="rank-list active" id="hot" data-rank-type="hot">
+                <div class="rank-header">
+                    <div class="rank-info">
+                        <div class="rank-cover">
+                            <img src="image/轮播图1.png" alt="热门榜封面" onerror="this.src='image/周杰伦.jpg'; this.onerror=null;">
+                            <div class="rank-play">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="rank-details">
+                            <h2>QQ音乐巅峰榜·热歌</h2>
+                            <p>实时更新最热门的中文歌曲排行</p>
+                            <div class="rank-stats">
+                                <span><i class="fas fa-users"></i> 2,345,678人在听</span>
+                                <span><i class="fas fa-clock"></i> 实时更新</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-actions">
+                        <button class="btn btn-primary" id="playAllHot">
+                            <i class="fas fa-play"></i> 全部播放
+                        </button>
+                        <button class="btn btn-secondary" id="collectHot">
+                            <i class="fas fa-plus"></i> 添加到歌单
+                        </button>
+                    </div>
+                </div>
+
+                <div class="music-list">
+                    <!-- 音乐项将通过JavaScript动态生成 -->
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </main>
+
+    <!-- 播放器 -->
+    <footer class="music-player">
+        <div class="player-container">
+            <div class="player-info">
+                <img class="current-cover" src="image/不能说的秘密.jpg" alt="当前封面" id="currentCover" onerror="this.src='image/周杰伦.jpg'; this.onerror=null;">
+                <div class="current-song">
+                    <h4 id="currentTitle">未选择音乐</h4>
+                    <p id="currentArtist">未知歌手</p>
+                </div>
+            </div>
+            
+            <div class="player-controls">
+                <button class="control-btn" onclick="togglePlay()">
+                    <i class="fas fa-play" id="playIcon"></i>
+                </button>
+                <button class="control-btn" onclick="previousTrack()">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="control-btn" onclick="nextTrack()">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+            </div>
+            
+            <div class="player-progress">
+                <span id="currentTime">00:00</span>
+                <div class="progress-bar">
+                    <div class="progress" id="progressBar"></div>
+                </div>
+                <span id="totalTime">00:00</span>
+            </div>
+            
+            <div class="player-volume">
+                <button class="volume-btn" onclick="toggleMute()">
+                    <i class="fas fa-volume-up" id="volumeIcon"></i>
+                </button>
+                <input type="range" class="volume-slider" min="0" max="100" value="50" onchange="setVolume(this.value)">
+            </div>
+        </div>
+        <audio id="audioPlayer" preload="metadata"></audio>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="rank-script.js"></script>
+</body>
+</html>

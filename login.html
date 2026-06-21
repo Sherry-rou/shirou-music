@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录 - QQ音乐</title>
+    <link rel="stylesheet" href="login-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-page">
+        <!-- 返回主页按钮 -->
+        <div class="back-home">
+            <a href="index.html">
+                <i class="fas fa-arrow-left"></i> 返回主页
+            </a>
+        </div>
+
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="logo">
+                        <h1><i class="fas fa-music"></i> QQ音乐</h1>
+                    </div>
+                    <h2>欢迎回来</h2>
+                    <p>登录您的账户，享受更多音乐服务</p>
+                </div>
+
+                <form class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" name="username" placeholder="请输入用户名" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" placeholder="请输入密码" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword()">
+                                <i class="fas fa-eye" id="eyeIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember"> 记住我
+                        </label>
+                        <a href="#" class="forgot-password">忘记密码？</a>
+                    </div>
+
+                    <button type="submit" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        立即登录
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>或</span>
+                </div>
+
+                <div class="social-login">
+                    <p>使用以下方式快速登录</p>
+                    <div class="social-buttons">
+                        <button class="social-btn wechat" onclick="socialLogin('wechat')">
+                            <i class="fab fa-weixin"></i>
+                            微信登录
+                        </button>
+                        <button class="social-btn qq" onclick="socialLogin('qq')">
+                            <i class="fab fa-qq"></i>
+                            QQ登录
+                        </button>
+                    </div>
+                </div>
+
+                <div class="register-link">
+                    <p>还没有账户？ <a href="#" onclick="showRegister()">立即注册</a></p>
+                </div>
+
+                <div class="privacy-info">
+                    <p>登录即表示您同意我们的 <a href="#">用户协议</a> 和 <a href="#">隐私政策</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="background-effects">
+            <div class="floating-music-note"></div>
+            <div class="floating-music-note"></div>
+            <div class="floating-music-note"></div>
+            <div class="floating-music-note"></div>
+        </div>
+    </div>
+
+    <script src="login-script.js"></script>
+</body>
+</html>
