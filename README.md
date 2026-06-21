@@ -16,7 +16,6 @@
 
 ## 📁 项目目录
 shirou-music/
-## 📁 项目目录
 - index.html：网站首页
 - login.html：登录页面
 - rank.html：音乐排行榜
